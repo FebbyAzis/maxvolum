@@ -11,7 +11,24 @@ class Pesanan extends Model
 {
     use HasFactory;
 
-    protected $table = 'pesanan';
+    protected $fillable = [
+        'users_id',
+        'no_pesanan',
+        'jenis_tas',
+        'bahan_luar',
+        'bahan_tengah',
+        'bahan_dalam',
+        'ukuran_tas_khusus',
+        'warna_bahan',
+        'list_tas',
+        'catatan',
+        'status',
+        'tanggal_pesan',
+        'subtotal',
+        'pengiriman',
+        'bukti_pembayaran',
+        
+    ];
 
     public function users(): BelongsTo
     {

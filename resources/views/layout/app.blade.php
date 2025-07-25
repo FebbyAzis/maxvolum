@@ -90,24 +90,31 @@ $user = Auth::user();
             <li
                 class="nav-item {{ request()->is('kelola-jenis-tas*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('/kelola-jenis-tas') }}">
-                    &nbsp;<i class="fas fa-shopping-bag"></i>
+                    <i class="fas fa-shopping-bag"></i>
                     <span>Jenis Tas</span></a>
+            </li>
+            <li
+                class="nav-item {{ request()->is('kelola-jenis-bahan*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('/kelola-jenis-bahan') }}">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Jenis Bahan</span></a>
             </li>
             <li
                 class="nav-item {{ request()->is('kelola-pesanan*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('/kelola-pesanan') }}">
-                    &nbsp;<i class="fas fa-receipt"></i>
+                    <i class="fas fa-receipt"></i>
                     <span>Pesanan</span></a>
             </li>
-
+<hr class="sidebar-divider">
             <div class="sidebar-heading">
                 Report
             </div>
+            
 
             <li
                 class="nav-item {{ request()->is('laporan*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('/laporan') }}">
-                    &nbsp;<i class="fas fa-file-alt"></i>
+                    <i class="fas fa-file-alt"></i>
                     <span>Laporan</span></a>
             </li>
 
@@ -118,7 +125,7 @@ $user = Auth::user();
                     <span>Cetak</span></a>
             </li>
             @else
-            <li class="nav-item {{ request()->is('/dashboard*') ? 'active' : '' }}">
+            <li class="nav-item {{ request()->is('dashboard*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('/dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -135,21 +142,28 @@ $user = Auth::user();
             <li
                 class="nav-item {{ request()->is('jenis-tas*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('/jenis-tas') }}">
-                    &nbsp;<i class="fas fa-shopping-bag"></i>
+                    <i class="fas fa-shopping-bag"></i>
                     <span>Jenis Tas</span></a>
+            </li>
+
+            <li
+                class="nav-item {{ request()->is('jenis-bahan*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('/jenis-bahan') }}">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Jenis Bahan</span></a>
             </li>
 
             <li
                 class="nav-item {{ request()->is('pesan-tas-custom*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('/pesan-tas-custom') }}">
-                    &nbsp;<i class="fas fa-file"></i>
+                    <i class="fas fa-file"></i>
                     <span>Pesan Tas Custom</span></a>
             </li>
 
             <li
                 class="nav-item {{ request()->is('pesanan-saya*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('/pesanan-saya') }}">
-                    &nbsp;<i class="fas fa-file"></i>
+                    <i class="fas fa-file"></i>
                     <span>Pesanan Saya</span></a>
             </li>
             @endif

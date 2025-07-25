@@ -7,6 +7,14 @@
             <h1 class="h3 mb-0 text-gray-800">Jenis Tas</h1>
             
         </div>
+         @if (session('Succes'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> {{session('Succes')}}.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        @endif
         @if (session('Success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Success!</strong> {{session('Success')}}.
@@ -31,12 +39,20 @@
             </button>
           </div>
         @endif
-    
-        <form action="{{url('/buat-pesanan-tas-custom')}}" method="POST">
+
+        @if ($user->alamat == null)
+            <p>Alamat anda masih kosong! lengkapi alamat anda untuk melakukan pesanan tas custom.</p>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1{{$user->id}}">Tambah Alamat</button>
+        @else
+                    <form action="{{url('/buat-pesanan-tas-custom')}}" method="POST">
             @csrf
             @method('POST')
             <input type="hidden" name="users_id" value="{{$user->id}}">
             <input type="hidden" name="tanggal_pesan" value="{{$tanggalHariIni}}">
+            @php
+                $y = $id + 1;
+            @endphp
+           <input type="hidden" name="no_pesanan" value="{{$tanggalHariIni}}{{$y}}">
             <input type="hidden" name="status" value="Menunggu">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -80,10 +96,10 @@
                                     <option value="Terpal truk anti air warna hijau">Terpal truk anti air warna hijau</option>
                                   </select>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label class="form-label" for="exampleInputText1">Jenis Bahan</label>
                                 <input type="text" class="form-control" id="exampleInputText1" name="jenis_bahan" required>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label class="form-label" for="exampleInputText1">Warna Bahan</label>
                                 <input type="text" class="form-control" id="exampleInputText1" name="warna_bahan" required>
@@ -115,6 +131,18 @@
                                 <label class="form-label" for="exampleInputText1">Catatan</label>
                                 <input type="text" class="form-control" id="exampleInputText1" name="catatan">
                             </div>
+                             <div class="form-group">
+                                <label class="form-label" for="exampleInputText1">Pengiriman</label>
+                                <select class="form-select text-secondary" name="pengiriman" required>
+                                  <option selected>Pilih ekspedisi pengiriman...</option>
+                                    <option value="JNE">JNE</option>
+                                    <option value="JNT">JNT</option>
+                                    <option value="Sicepat">Sicepat</option>
+                                    <option value="Anteraja">Anteraja</option>
+                                    <option value="Lalamove">Lalamove</option>
+                                    <option value="Ambil Ditempat">Ambil Ditempat</option>
+                                  </select>
+                            </div>
                             <div class="form-group text-center">
                                 <button class="btn btn-primary" type="submit">Buat Pesanan</button>
                             </div>
@@ -123,6 +151,9 @@
                 </div>
             </div>
           </form>
+        @endif
+
+
 
     </div>
     <!-- /.container-fluid -->
@@ -156,6 +187,36 @@
                 <label class="form-label" for="exampleInputText1">Spesifikasi</label>
                 <textarea name="spesifikasi" id="" cols="50" rows="10" required></textarea>
             </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<form action="{{url('tambah-alamat/'. $user->id)}}" method="POST" >
+    @csrf
+    @method('PUT')
+<div class="modal fade" id="exampleModal1{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Alamat</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           
+            <div class="form-group">
+                <label class="form-label" for="exampleInputText1">Alamat</label>
+                <textarea name="alamat" id="" cols="30" rows="10"></textarea>
+            </div>
+
+            
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>

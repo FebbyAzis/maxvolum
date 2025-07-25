@@ -33,31 +33,35 @@
           </div>
         @endif
     
+        <div class="row">
         @foreach ($jta as $item)
+        <div class="col-sm-3">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <h6 class="m-0 font-weight-bold text-primary">{{$item->ukuran_tas}}</h6>
-
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#exampleModal1{{$item->id}}"><i
-                            class="fas fa-edit fa-sm text-white-50"></i> Edit Jenis Tas</a>
-                    </div>
+                    
+                        <h5 class="m-0 font-weight-bold text-primary">{{$item->ukuran_tas}}</h5>
                 </div>
-                               
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6"><img src="{{ url('/photos/'.$item->gambar)}}" width="100%"></div>
-                    <div class="col-md-6">
-                        <p>{{$item->spesifikasi}}</p>
-                    </div>
-                </div>
+            
+                    <div class="col-md-12">  <center><img src="{{ url('/photos/'.$item->gambar)}}" width="70%">   </center>     </div> 
+                      <br><hr>
+                      <div class="col-sm-12 text-right">
+                        <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal1{{$item->id}}">
+                        Edit
+                      </button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3{{$item->id}}">
+                        Lihat
+                      </button>
+                      </div>
+                         
+                 
             </div>
         </div>
+        </div>
         @endforeach
+</div>
 
     </div>
     <!-- /.container-fluid -->
@@ -147,4 +151,30 @@
     </div>
   </div>
 </form>
+@endforeach
+
+@foreach ($jta as $item)
+<div class="modal fade" id="exampleModal3{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">{{$item->ukuran_tas}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+        
+                    <center><img src="{{ url('/photos/'.$item->gambar)}}" width="70%">   </center>
+                    <br><br>
+                    <pre>{{$item->spesifikasi}}</pre>
+        
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+                  <button type="submit" class="btn btn-primary">Ya</button>
+                </div>
+              </div>
+            </div>
+          </div>
 @endforeach
