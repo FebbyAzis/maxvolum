@@ -17,6 +17,11 @@ class DashboardController extends Controller
         return view('users.dashboard');
     }
 
+    public function dashboard_owner()
+    {
+        return view('owner.dashboard');
+    }
+
     public function cetak()
     {
       

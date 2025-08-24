@@ -50,3 +50,11 @@ Route::middleware(['auth', 'users'])->group(function(){
     Route::put('/pembayaran/{id}', [PesananController::class, 'pembayaran']);
     Route::put('/tambah-alamat/{id}', [PesananController::class, 'tambah_alamat']);
 });
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/dashboard-view', [DashboardController::class, 'dashboard_owner'])->name('owner.dashboard');
+    Route::get('/jenis-tas-view', [JenisTasController::class, 'jenis_tas_users']);
+    Route::get('/jenis-bahan-view', [JenisBahanController::class, 'jenis_bahan_users']);
+    Route::get('/pesanan-view', [PesananController::class, 'pesanan_saya']);
+
+});
